@@ -1,0 +1,13 @@
+from requests_html import HTMLSession
+import json
+
+session = HTMLSession()
+r = session.get('https://campus.fa.ru/my/')
+input_ = r.html.find('#login > input[type=hidden]',first=True)
+logintoken = input_.attrs['value']
+payload={'logintoken':logintoken,'username': 
+222603,
+'password': 
+'OBfo5466'}
+session.post('https://campus.fa.ru/login/index.php',data=payload,allow_redirects=True)
+page = session.get('https://campus.fa.ru/my/')
